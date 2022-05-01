@@ -1,0 +1,135 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="row" [hidden]="!deleteMessage">
+
+                  <div class="col-sm-4"></div>
+                  <div class="col-sm-4">
+                          <div class="alert alert-info alert-dismissible">
+                                  <button type="button" class="close" data-dismiss="alert">×</button>
+                                  <strong>Event Data Deleted</strong>
+                          </div>
+                  </div>
+                  <div class="col-sm-4"></div>
+          </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Events</h4>
+                        <p class="card-category"> Here is a table of all events details</p>
+                        <div class="d-flex me-auto">
+                            <input type="text" [(ngModel)]="searchTerm" class="form-control me-2" searchTerm id="name" placeholder="events ...">
+                            <button (click)="findevents()" type="button" class="btn nga-btn-boxoffice-primary btn-sm nga-btn-boxoffice"><i class="fa fa-search"></i></button>
+
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+        <table  class="table table-hover" datatable [dtOptions]="dtOptions"
+        [dtTrigger]="dtTrigger"  >
+            <thead class=" text-primary">
+                <tr>
+                    <th class="font-weight-bold">Event id</th>
+                    <th class="font-weight-bold">Event title</th>
+                    <th class="font-weight-bold"> Event Description</th>
+                    <th class="font-weight-bold">Event date</th>
+                    <th class="font-weight-bold">Event lieu</th>
+                    <th class="font-weight-bold">Event type</th>
+                    <th class="font-weight-bold">eventDuration</th>
+                    <th class="font-weight-bold">maximal number</th>
+                    <th class="font-weight-bold">donation</th>
+
+                    <th>Action</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                 <tr *ngFor="let student of students  ">
+                    <td class="font-weight-bold text-primary"> {{student.event_id}}</td>
+                    <td>{{student.eventTitle}}</td>
+                    <td>{{student.eventDescription}}</td>
+                    <td>{{student.eventDate}}</td>
+                    <td>{{student.lieu}}</td>
+                    <td>{{student.type}}</td>
+                    <td>{{student.eventDuration}}</td>
+                    <td>{{student.nbmax}}</td>
+                    <td>{{student.donation}}</td>
+                    <td><button (click)="deleteEvent(student.event_id)" class='btn btn-primary'><i class="fa fa-futboll-0">Delete</i></button>
+                            <button (click)="updateStudent(student.event_id)" class='btn btn-info'
+                            data-toggle="modal" data-target="#myModal">Update</button>
+                    </td>
+                  </tr>
+            </tbody><br>
+        </table>
+    </div>
+  </div>
+
+  <div class="modal" id="myModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+                  <form [formGroup]="studentupdateform" #updstu (ngSubmit)="updateStu(updstu)">
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title" style="text-align: center">Update Student</h4>
+
+              </div>
+
+              <!-- Modal body -->
+              <div class="modal-body" *ngFor="let student of studentlist " >
+                  <div [hidden]="isupdated">
+
+                      <input type="hidden" class="form-control"  formControlName="event_id" [(ngModel)]="student.event_id">
+                              <div class="form-group">
+                                  <label for="name">Student Name</label>
+                                  <input  class="form-control"  formControlName="eventTitle" [(ngModel)]="student.eventTitle"  >
+                              </div>
+
+                              <div class="form-group">
+                                  <label for="name">Student Email</label>
+                                  <input  class="form-control" formControlName="eventDescription" [(ngModel)]="student.eventDescription">
+                              </div>
+
+                              <div class="form-group">
+                                  <label for="name">Student Branch</label>
+                                  <input  class="form-control" formControlName="eventDate" [(ngModel)]="student.eventDate">
+                              </div>
+                              <div class="form-group">
+                                  <label for="name">StudentId</label>
+                                  <input  class="form-control" formControlName="event_id" [(ngModel)]="student.type">
+                              </div>
+
+                    </div>
+                    <div [hidden]="!isupdated">
+                        <h4>Student Detail Updated!</h4>
+                    </div>
+
+              </div>
+
+              <!-- Modal footer -->
+              <div class="modal-footer" >
+                <button type="submit" class="btn btn-success" [hidden]="isupdated">Update</button>
+
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="changeisUpdate()">Close</button>
+              </div>
+
+          </form>
+            </div>
+          </div>
+        </div>
+
+    </div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+

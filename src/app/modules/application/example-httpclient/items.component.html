@@ -1,0 +1,76 @@
+
+<app-listnews></app-listnews>
+
+<div class="container py-5">
+  <div class="row pb-4 justify-content-center">
+    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+      <div class="row p-4 text-center">
+        <div class="card mb-4">
+
+        <div *ngIf="!loaded">
+          <div class="spinner-grow text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-secondary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-success" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-danger" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-warning" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-info" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-dark" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
+      <div class="row p-4">
+        <div class="table-responsive nga-httpclient-table blue-gradient" *ngIf="loaded">
+          <table class="table table-hover table-striped table-responsive-md">
+            <thead>
+              <tr>
+                <th class="font-weight-bold">id</th>
+                <th class="font-weight-bold"> title</th>
+                <th class="font-weight-bold">  Description</th>
+                <th class="font-weight-bold"> date</th>
+                <th class="font-weight-bold"> lieu</th>
+                <th class="font-weight-bold"> type</th>
+                <th class="font-weight-bold">Duration</th>
+                <th class="font-weight-bold"> number</th>
+                <th class="font-weight-bold">donation</th>
+
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let student of students  ">
+                <td class="font-weight-bold text-primary"> {{student.event_id}}</td>
+                <td>{{student.eventTitle}}</td>
+                <td>{{student.eventDescription}}</td>
+                <td>{{student.eventDate}}</td>
+                <td>{{student.lieu}}</td>
+                <td>{{student.type}}</td>
+                <td>{{student.eventDuration}}</td>
+                <td>{{student.nbmax}}</td>
+                <td>{{student.donation}}</td>
+                <td><button (click)="deleteEvent(student.event_id)" class='btn btn-primary'><i class="fa fa-futboll-0">Delete</i></button>
+                        <button (click)="updateStudent(student.event_id)" class='btn btn-info'
+                        data-toggle="modal" data-target="#myModal">Update</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
