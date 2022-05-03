@@ -29,4 +29,9 @@ export class InvitationService extends DataService  {
     this.setUrl('/between/'+start+"/"+end)
     return this.getAlll()
   }
+  getAllInvitation(){
+    this.setUrl('/retrieve-all')
+    return this.getAlll()
+  }
+  
 }

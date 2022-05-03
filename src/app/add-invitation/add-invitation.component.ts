@@ -17,7 +17,6 @@ export class AddInvitationComponent implements OnInit {
     {id: 2, name: 'Ali Salah'},
     {id: 3, name: 'Mostafa kammoun'},
     {id: 4, name: 'Amine ali'},
-   
   ];
   selected:any = [];
   constructor(private formBuilder: FormBuilder,private invitationService:InvitationService) {
@@ -25,7 +24,9 @@ export class AddInvitationComponent implements OnInit {
    }
 
   ngOnInit() {
-    console.log(this.selected);
+   
+    
+ 
     
     this.invitationService.getUsers().subscribe(res=>{
   ///    this.users=res

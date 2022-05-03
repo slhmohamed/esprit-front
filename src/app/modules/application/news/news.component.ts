@@ -95,6 +95,9 @@ export class NewsComponent implements OnInit {
   eventssss :Ev[] =[];
    searchTerm!: String;
   ngOnInit() {
+    this.invitationService.getAllInvitation().subscribe(data =>{
+      this.student =data;
+       })
     this.isupdated=false;
     this.dtOptions = {
       pageLength: 6,
@@ -102,22 +105,15 @@ export class NewsComponent implements OnInit {
       lengthMenu:[[6, 16, 20, -1], [6, 16, 20, "All"]],
       processing: true
     };
-    this.studentservice.afficherevents().subscribe(data =>{
-    this.students =data;
-    this.dtTrigger.next;
+    
+    
     this.filterForm = this.formBuilder.group({
       start: ['', Validators.required],
       end: ['', Validators.required],
       
  
      });
-    this.getItems();
-    this.formFilters.valueChanges
-      .subscribe(data => {
-        this.formFiltersChanged(data, false);
-      });
-  })
-}
+    }
   
   // convenience getter for easy access to form fields
   get f() { return this.filterForm.controls; }
@@ -132,7 +128,7 @@ export class NewsComponent implements OnInit {
  
 this.invitationService.filterInvitation(this.filterForm.value.start,this.filterForm.value.end).subscribe(res=>{
 
-this.students=res
+this.student=res
   
 this.onReset()
 })
