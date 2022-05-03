@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './modules/general/home/home.component';
@@ -24,7 +25,7 @@ import { InvitationService } from './service/invitation.service';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-
+    NgSelectModule,
     HeaderModule,
     FooterModule,
     FormsModule,

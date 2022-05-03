@@ -101,83 +101,104 @@
               class="{{ badge.icon }} me-1"></i>{{ badge.caption }}<i class="close fas fa-times"></i></div>
         </div>
       </div>
-      <div *ngIf="!loaded" class="row p-2">
-        <div class="d-flex justify-content-center">
-          <div class="spinner-grow me-2 nga-bd-blue-200" role="status">
-            <span class="visually-hidden"></span>
-          </div>
-          <div class="spinner-grow me-2 nga-bd-blue-300" role="status">
-            <span class="visually-hidden"></span>
-          </div>
-          <div class="spinner-grow me-2 nga-bd-blue-400" role="status">
-            <span class="visually-hidden"></span>
-          </div>
-          <div class="spinner-grow me-2 nga-bd-blue-500" role="status">
-            <span class="visually-hidden"></span>
-          </div>
-          <div class="spinner-grow me-2 nga-bd-blue-600" role="status">
-            <span class="visually-hidden"></span>
-          </div>
-          <div class="spinner-grow me-2 nga-bd-blue-700" role="status">
-            <span class="visually-hidden"></span>
-          </div>
-          <div class="spinner-grow me-2 nga-bd-blue-800" role="status">
-            <span class="visually-hidden"></span>
-          </div>
-        </div>
-      </div>
-      <div *ngIf="loaded" class="row">
-        <div *ngFor="let item of items; let i=index;" class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 px-2 mb-3">
-          <div class="nga-card-movie">
-            <div class="row">
-              <div class="col">
-                <div class="card-movie-img">
-                  <a (click)="openTrailer(item,i)">
-                    <img src="https://img.youtube.com/vi/{{ item.youtubeLink }}/mqdefault.jpg"
-                      class="img-fluid rounded z-depth-2" alt="">
-                  </a>
-                  <div class="nga-player" (click)="openTrailer(item,i)">
-                    <img src="./assets/params/images/icons/play-60-60.png">
-                  </div>
-                </div>
+  
+     
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+
+                        <h4 class="card-title ">Invitations</h4>
+                        <p class="card-category"> Here is a table of all Invitations</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+ 
+      <table  class="table table-hover" datatable  
+         >
+
+            <thead class=" text-primary">
+                <tr>
+                    <th class="font-weight-bold">news id</th>
+                    <th class="font-weight-bold"> invitationStatus</th>
+                    <th class="font-weight-bold">  Status</th>
+                                        <th class="font-weight-bold"> publishedat</th>
+                                        <th class="font-weight-bold"> rating</th>
+
+                    <th>Action</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                 <tr *ngFor="let student of students ">
+                    <td class="font-weight-bold text-primary"> {{student.invitation_id}}</td>
+                    <td>{{student.invitationBody}}</td>
+                    <td>{{student.invitationStatus}}</td>
+                    <td>{{student.invitationTitle}}</td>
+
+                    <td>{{student.invitationType}}</td>
+                    <td><button (click)="deleteEvent(student.invitation_id)" class='btn btn-primary'><i class="fa fa-futboll-0">Delete</i></button>
+
+
+                  </tr>
+            </tbody><br>
+        </table>
+    </div>
+  </div>
+
+  <div class="modal" id="myModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+                  <form [formGroup]="studentupdateform" #updstu >
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title" style="text-align: center">Update news</h4>
+
               </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <div class="card-movie-text">
-                  <a class="waves-effect" (click)="openTrailer(item,i)">
-                    <i class=" {{ item.category | category }} me-1"></i>
-                    <span>{{ item.name}}</span>
-                  </a>
-                </div>
+
+              <!-- Modal body -->
+              <div class="modal-body" *ngFor="let student of studentlist " >
+                  <div [hidden]="isupdated">
+
+                      <input type="hidden" class="form-control"  formControlName="news_id" [(ngModel)]="student.news_id">
+                              <div class="form-group">
+                                  <label >Student Name</label>
+                                  <input type="text" class="form-control"  formControlName="newsTitle" [(ngModel)]="student.newsTitle"  >
+                              </div>
+
+                              <div class="form-group">
+                                  <label >Student Email</label>
+                                  <input type="text" class="form-control" formControlName="newsDescription" [(ngModel)]="student.newsDescription">
+                              </div>
+
+                              <div class="form-group">
+                                  <label >StudentId</label>
+                                  <input type="date" class="form-control" formControlName="news_id" [(ngModel)]="student.news_id">
+                              </div>
+                    </div>
+                    <div [hidden]="!isupdated">
+                        <h4>Student Detail Updated!</h4>
+                    </div>
+
               </div>
+
+              <!-- Modal footer -->
+              <div class="modal-footer" >
+                <button type="submit" class="btn btn-success" [hidden]="isupdated">Update</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="changeisUpdate()">Close</button>
+              </div>
+
+          </form>
             </div>
           </div>
         </div>
-      </div>
-      <div *ngIf="loaded" class="row mb-2">
-        <div class="d-flex justify-content-center mt-4">
-          <nav aria-label="...">
-            <ul class="pagination pagination-sm">
-              <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">...</a></li>
-              <li class="page-item d-none d-sm-block"><a class="page-link" href="#">11</a></li>
-              <li class="page-item active" aria-current="page">
-                <a class="page-link" href="#">12</a>
-              </li>
-              <li class="page-item d-none d-sm-block"><a class="page-link" href="#">13</a></li>
-              <li class="page-item"><a class="page-link" href="#">...</a></li>
-              <li class="page-item"><a class="page-link" href="#">50</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#">&raquo;</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
+
+    </div>
+</div>
+</div>
+</div>
+
     </div>
   </div>
   <section>

@@ -11,7 +11,10 @@ export class InvitationService extends DataService  {
     super('http://localhost:8112', '/invit', http);
      
   }
-
+  getUsers(){
+    this.setUrl('/getUsers');
+    return this.getAlll()
+  }
   sendInvitation(invitation:any){
     let user_id=localStorage.getItem('id')
       this.setUrl("/save/"+user_id)

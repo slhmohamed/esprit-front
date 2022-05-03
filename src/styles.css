@@ -1,3 +1,4 @@
+@import "~@ng-select/ng-select/themes/ant.design.theme.css";
 body {
   padding-top: 3.5rem;
   font-family: "Roboto", sans-serif;
